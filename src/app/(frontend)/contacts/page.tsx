@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
 import '../contacts/contacts.css'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
@@ -136,7 +135,6 @@ const ContactsPage = () => {
                     <Image src="/contact.jpg" alt="Foto" width={300} height={300} />
                 </div>
             </div>
-            <CreditsSlider />
         </div>
     )
 }

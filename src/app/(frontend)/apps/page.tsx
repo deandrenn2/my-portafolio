@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
-import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
 const Apps = () => {
     const [apps, setApps] = useState<any[]>([])
 
@@ -54,7 +53,6 @@ const Apps = () => {
                     </div>
                 ))}
             </div>
-            <CreditsSlider />
         </div>
     )
 }

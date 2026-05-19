@@ -1,7 +1,7 @@
 .header {
     display: flex;
-    height: 60px;
-    background: linear-gradient(145deg, #3c505b, #4e3e4b, #40373e);
+    align-items: center;
+    justify-content: center;
     justify-content: flex-end;
 }
 
@@ -15,15 +15,15 @@
 
 
 .icon-fanh {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     color: white;
     cursor: pointer;
 }
 
 .icon-figlobe {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     justify-content: flex-end;
     color: white;
     cursor: pointer;
@@ -32,9 +32,9 @@
 .header-icon {
     display: flex;
     background-color: rgb(253, 253, 253);
-    border-radius: 11px;
-    width: 100px;
-    height: 40px;
+    border-radius: 20px;
+    width: 120px;
+    height: 50px;
     align-items: center;
     justify-content: space-around;
 }
@@ -58,14 +58,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
 
 }
 
 .theme-btn svg {
     font-size: 20px;
-    color: #000000;
+    color: #0b0b0b;
 }
 
 .active-sun svg,
@@ -74,11 +74,9 @@
 }
 
 .active-sun {
-
-    background-color: #4da3ff;
+    background-color: var(--dodger-blue);
 }
 
-
 .active-moon {
-    background-color: #4da3ff;
+    background-color: var(--dodger-blue);
 }

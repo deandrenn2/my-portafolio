@@ -3,8 +3,6 @@ import '../services/services.css'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
-
 
 const ServicesPage = () => {
     const router = useRouter();
@@ -33,9 +31,6 @@ const ServicesPage = () => {
             </div>
             <div className='btn-contacto-container'>
                 <button className='btn-contacto' onClick={() => router.push('/contacts')}>Contactar ahora </button>
-            </div>
-            <div>
-                < CreditsSlider />
             </div>
         </div>
     )

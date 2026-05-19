@@ -1,5 +1,5 @@
 :root {
-  --steel-blue: #4873bd;
+  --steel-blue: #4da3ff;
   --dodger-blue: #3277f6;
   --amazon: #386d59;
   --steel-gray: #271f3c;
@@ -7,4 +7,9 @@
   --leather: #9b6e5a;
   --gun-powder: #3a3b59;
   --cape-cod: rgb(55, 63, 60);
+
+  /* nuevos colores */
+  --gradient-color-1: #3c505b;
+  --gradient-color-2: #4e3e4b;
+  --gradient-color-3: #40373e;
 }

@@ -1,19 +1,23 @@
 import './styles.css'
 import { Sidebar } from '@/layout/Sidebar/Sidebar'
 import { Header } from '@/layout/Header/Header'
+import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
-        <div className='container-principal'>
+        <Header />
+        <div className="container-principal">
           <Sidebar />
-          <div className="layout-content">
-            <Header />
-            <main className="layout-main">
-              {children}
-            </main>
-          </div>
+          <main className="layout-main">
+            {children}
+            <CreditsSlider />
+          </main>
         </div>
       </body>
     </html>

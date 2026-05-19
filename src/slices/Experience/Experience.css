@@ -82,7 +82,7 @@
     font-size: 21px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: rgb(237, 235, 235);
-    line-height: 1.2;
+    white-space: pre-line;
     margin: 0;
 }
 .falink {

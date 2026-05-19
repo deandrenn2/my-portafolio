@@ -7,7 +7,7 @@
 }
 
 .profile-subtitle {
-    color: blue;
+    color: #0c63c0;
     font-size: 30px;
     font-weight: 600;
     margin: 10px 0 20px 0;
@@ -30,7 +30,7 @@
     font-size: 44px;
     margin-bottom: 10px;
     font-weight: 700;
-    color: #5AA5FF;
+    color: #0c63c0;
 
 }
 
@@ -69,14 +69,14 @@
 
 .profile-item {
     padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.684);
+    background: rgba(255, 255, 255, 0.511);
     border: 1.5px solid rgb(255, 255, 255);
     border-radius: 10px;
     font-size: 14px;
     font-weight: 700;
     backdrop-filter: blur(10px);
     transition: 0.3s;
-    color: rgb(47, 60, 245);
+    color: #0c63c0;
 
 }
 
@@ -101,7 +101,7 @@
 
 .btn-contact:hover {
     background: rgb(209, 217, 221);
-    color: blue;
+    color: #0c63c0;
 
 }
 

@@ -3,7 +3,6 @@ import './styles.css'
 import { Projects } from '@/slices/Projects/Projects'
 import { Profile } from '@/slices/Profile/Profile'
 import { Experience } from '@/slices/Experience/Experience'
-import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
 
 export default function HomePage() {
   return (
@@ -14,7 +13,6 @@ export default function HomePage() {
           <Projects />
           <Experience />
         </div>
-        <CreditsSlider />
       </div>
     </div>
   )

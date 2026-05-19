@@ -8,11 +8,11 @@
   justify-content: space-between;
   color: white;
   border-right: 1px solid #465d6a;
-  box-shadow: 2px 0 5px rgba(211, 27, 27, 0.1);
 }
 
 
 .logo {
+  width: 100%;
   text-transform: uppercase;
   padding: 0px;
   text-align: center;
@@ -28,10 +28,10 @@
 }
 
 .subtitle{
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 0px;
   font-weight: 700;
-  color: blue;
+  color: #0c63c0;
 }
 
 
@@ -58,11 +58,10 @@
 
 .menu-btn:hover {
   background: rgba(209, 217, 221);
-  color: blue;
-
+  color: #0c63c0;
 }
 
 .menu-btn.active {
   background: rgba(209, 217, 221);
-  color: rgb(47, 0, 255);
+  color: #0c63c0;
 }

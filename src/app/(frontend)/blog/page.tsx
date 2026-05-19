@@ -1,6 +1,5 @@
 'use client'
 import '../blog/blog.css'
-import { CreditsSlider, } from '@/components/CreditsSlider/CreditsSlider'
 import { FaComment, FaHandsHelping, FaBookmark, FaTree } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -85,7 +84,6 @@ const BlogPage = () => {
                     </div>
                 ))}
             </div>
-            <CreditsSlider />
         </div>
     )
 }

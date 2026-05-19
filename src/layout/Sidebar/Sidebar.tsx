@@ -10,7 +10,7 @@ export const Sidebar = () => {
         <aside className="sidebar">
             <div className='logo'>
                 <h2 className='title'>DEANDRE</h2>
-                <p className='subtitle'>Developer Web FullStack</p>
+                <h1 className='subtitle'>Developer Web FullStack</h1>
             </div>
             <div>
                 <nav className="menu">
