@@ -22,6 +22,7 @@ export const Blog: CollectionConfig = {
             label: 'Fecha de Publicacion',
 
         },
+
         {
             name: 'author',
             type: 'text',

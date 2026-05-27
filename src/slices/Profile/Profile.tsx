@@ -31,7 +31,6 @@ export const Profile = () => {
     return (
         <div className='profile-container'>
             <div className='profile-content'>
-
                 <div>
                     <div className="profile-line">
                         <h1 className='profile-title-name'>{profile.title}</h1>

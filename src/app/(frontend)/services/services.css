@@ -28,7 +28,6 @@
     padding: 12px;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 15px rgb(128, 0, 255);
 }
 
 .service-img {
@@ -40,7 +39,7 @@
 }
 
 .service-title {
-    color: blue;
+    color: #0973e4;
     font-size: 15px;
     font-weight: 700;
 }
@@ -60,15 +59,14 @@
     background: transparent;
     color: white;
     font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.484);
+    border: 2px solid rgba(255, 255, 255, 0.484);
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.276);
-    box-shadow: 0 0 15px rgb(128, 0, 255);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .btn-contacto:hover {
-   background: rgb(209, 217, 221);
-    color: blue;
+   background: rgba(255, 255, 255, 0.635);
+    color: #0c63c0;
     font-weight: 700;
 }
 

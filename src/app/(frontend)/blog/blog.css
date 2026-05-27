@@ -62,20 +62,19 @@
 }
 
 .blog-btn {
-    padding: 10px 35px;
+    padding: 9px 45px;
     font-size: 18px;
     color: white;
     font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.484);
+    border: 2px solid rgba(255, 255, 255, 0.484);
     border-radius: 10px;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 10px rgb(128, 0, 255);
+    background: rgba(255, 255, 255, 0.196);
 }
 
 .blog-btn:hover {
-    background: rgba(209, 217, 221);
-    color: blue;
+    background: rgba(255, 255, 255, 0.635);
+    color: #0c63c0;
 }
 
 .blog-card {
@@ -176,4 +175,16 @@
 .blog-fahands,
 .blog-date {
 font-size: 18px;
+}
+
+.blogdetaill-related{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.post-title {
+    text-align: center;
+    font-size: 40px;
+    color: white;
 }

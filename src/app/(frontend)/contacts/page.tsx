@@ -3,6 +3,7 @@ import Image from 'next/image'
 import '../contacts/contacts.css'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import Foto from '@/Img/30e94844-a5b5-4ac5-a00d-c4dea890015d-1.png'
 
 const ContactsPage = () => {
     const [form, setForm] = useState({
@@ -132,7 +133,7 @@ const ContactsPage = () => {
                     </form>
                 </div>
                 <div className="contacts-foto-box">
-                    <Image src="/contact.jpg" alt="Foto" width={300} height={300} />
+                    <Image src={Foto} alt="Foto" className='contacts-foto' />
                 </div>
             </div>
         </div>

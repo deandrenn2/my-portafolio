@@ -8,7 +8,7 @@
 
 .profile-subtitle {
     color: #0c63c0;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 600;
     margin: 10px 0 20px 0;
     transform: translateY(-50px);
@@ -17,19 +17,19 @@
 .profile-line {
     display: flex;
     align-items: center;
-    gap: 1px;
+    gap: 10px;
 }
 
 .profile-title-name {
-    font-size: 42px;
+    font-size: 50px;
     font-weight: 700;
     color: white;
 }
 
 .profile-arya {
-    font-size: 44px;
+    font-size: 50px;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 900;
     color: #0c63c0;
 
 }
@@ -37,7 +37,7 @@
 .profile-fullname {
     display: flex;
     flex-direction: column;
-    line-height: 1.1;
+    line-height: 1.2;
 }
 
 .profile-name-up {
@@ -90,17 +90,15 @@
     padding: 0px 50px;
     font-size: 17px;
     border-radius: 10px;
-    background: transparent;
     color: white;
     font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.484);
+    border: 2px solid rgba(255, 255, 255, 0.582);
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 15px rgb(128, 0, 255);
 }
 
 .btn-contact:hover {
-    background: rgb(209, 217, 221);
+    background: rgba(255, 255, 255, 0.635);
     color: #0c63c0;
 
 }
@@ -129,5 +127,5 @@
     height: 100%;
     object-fit: cover;
     border-radius: 25px;
-    box-shadow: 0 0 15px rgb(128, 0, 255);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.635);
 }

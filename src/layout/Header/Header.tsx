@@ -1,8 +1,9 @@
 'use client';
 import './header.css'
-import { FaGlobeAmericas, FaHandsHelping, FaSun, FaMoon, } from "react-icons/fa";
+import { FaHandsHelping, FaSun, FaMoon, } from "react-icons/fa";
 import { useState } from "react";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 export const Header = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
@@ -11,7 +12,7 @@ export const Header = () => {
             <div className='header-container'>
                 <FaHandsHelping className="icon-fanh" />
                 <div>
-                    <FaGlobeAmericas className='icon-figlobe' />
+                    <FontAwesomeIcon icon={faGlobe} className='icon-figlobe' />
                 </div>
 
                 <div className='header-icon'>

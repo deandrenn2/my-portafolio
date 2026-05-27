@@ -6,6 +6,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { useEffect, useState } from 'react'
 
 export const Projects = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [projects, setProjects] = useState<any[]>([])
 
     useEffect(() => {

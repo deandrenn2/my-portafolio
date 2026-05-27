@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import '../Sidebar/Sidebar.css'
-import { RedesSocials } from '../../slices/RedesSocials/RedesSocials'
+import { RedesSocials } from '../../components/RedesSocials/RedesSocials'
 import { usePathname } from 'next/navigation'
 export const Sidebar = () => {
     const pathname = usePathname()
