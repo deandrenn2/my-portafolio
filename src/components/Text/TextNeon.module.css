@@ -1,0 +1,17 @@
+.text-neon {
+    color: #2272FF;
+    text-shadow: 0px 0px 1px #8fbddd, 
+    -1px -1px 1px #8fbddd, 
+    -1px 1px 1px #8fbddd, 
+    2px 0px 1px #8fbddd, 
+    -1px -1px 2px #3271df, 
+    3px 4px 4px #3271df, 
+    2px -2px 2px #3271df, 
+    0px 0px 1px #8fbddd, 
+    -1px 1px 2px #3271df, 
+    0px 0px 1px #8fbddd, 
+    8px 8px 13px #3b83ff, 
+    -6px -5px 13px #3b83ff;
+    font-weight: 200;
+    font-family: var(--font-family);
+}

@@ -1,5 +1,4 @@
 'use client'
-import './styles.css'
 import { Projects } from '@/slices/Projects/Projects'
 import { Profile } from '@/slices/Profile/Profile'
 import { Experience } from '@/slices/Experience/Experience'

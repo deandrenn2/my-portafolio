@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import '../Sidebar/Sidebar.css'
 import { RedesSocials } from '../../components/RedesSocials/RedesSocials'
 import { usePathname } from 'next/navigation'
 export const Sidebar = () => {
@@ -11,6 +10,7 @@ export const Sidebar = () => {
             <div className='logo'>
                 <h2 className='title'>DEANDRE</h2>
                 <h1 className='subtitle'>Developer Web FullStack</h1>
+
             </div>
             <div>
                 <nav className="menu">

@@ -7,23 +7,23 @@
 }
 
 .profile-subtitle {
-    color: #0c63c0;
-    font-size: 40px;
-    font-weight: 600;
-    margin: 10px 0 20px 0;
+
     transform: translateY(-50px);
+    font-family: var(--font-family);
 }
 
 .profile-line {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: hagrid, obviously;
 }
 
 .profile-title-name {
     font-size: 50px;
     font-weight: 700;
     color: white;
+    margin: 0px;
 }
 
 .profile-arya {

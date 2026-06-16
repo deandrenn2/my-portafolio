@@ -6,8 +6,25 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaTelegramPlane } from 'react-icons/fa'
 import { Loading } from '@/components/Loading/Loading'
+import TextNeonSvg from '@/components/Text/TextNeonSvg'
+import { Profile as ProfileType, Media } from '@/payload-types'
 export const Profile = () => {
-    const [profile, setProfile] = useState<any>(null)
+    const [profile, setProfile] = useState<ProfileType>({
+        id: 0,
+        title: '',
+        firstName: '',
+        lastName: '',
+        description: '',
+        tags: [],
+        photo: {
+            id: 0,
+            alt: '',
+            updatedAt: '',
+            createdAt: '',
+            url: ''
+        } as Media
+    })
+
     const [loading, setLoading] = useState(true)
 
     const router = useRouter()
@@ -16,7 +33,7 @@ export const Profile = () => {
         const getProfile = async () => {
             try {
                 const res = await fetch('/api/globals/profiles')
-                const data = await res.json()
+                const data = await res.json() as ProfileType
                 setProfile(data)
             } catch (error) {
                 console.error(error)
@@ -48,10 +65,9 @@ export const Profile = () => {
                     </div>
 
                     <div>
-                        <h2 className="profile-subtitle">
-                            {profile.subtitle}
-                        </h2>
-
+                        <TextNeonSvg text={profile.subtitle ?? ''}
+                            className='profile-subtitle'
+                        />
                         <p className="profile-description">
                             {profile.description}
                         </p>
@@ -86,10 +102,10 @@ export const Profile = () => {
             </div>
 
             <div className="profile-photo-box">
-                {profile.photo?.url && (
+                {typeof profile.photo === 'object' && profile.photo?.url && (
                     <Image
-                        src={profile.photo.url}
-                        alt={profile.title}
+                        src={profile.photo?.url || ''}
+                        alt={profile.title ?? ''}
                         className="profile-photo"
                         width={340}
                         height={480}
