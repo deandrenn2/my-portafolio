@@ -1,8 +1,14 @@
 # Requires `output: 'standalone'` in next.config.mjs (already set).
 # Adapted from https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 # for this project, which uses pnpm + Payload CMS with SQLite.
-
-FROM node:22.17.0-alpine AS base
+#
+# Uses a Debian-based (glibc) image rather than Alpine (musl): the sqlite
+# adapter's native "libsql" dependency ships prebuilt binaries per libc, and
+# the musl (Alpine) ones are more likely to be missing/mismatched than the
+# glibc ones, on top of Next's standalone output tracing already missing
+# some of libsql's dynamically-required native files. Debian avoids that
+# whole class of problems.
+FROM node:22.17.0-slim AS base
 
 # Pin pnpm explicitly instead of relying on corepack, which needs to reach
 # npm's registry to resolve a version and can fail in restricted build
@@ -11,8 +17,6 @@ RUN npm install -g pnpm@10
 
 # Install dependencies only when needed
 FROM base AS deps
-# libc6-compat is needed for some native deps on alpine
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
@@ -60,6 +64,14 @@ RUN chown -R nextjs:nodejs /app/data /app/media
 # Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Safety net: Next's output file tracing can miss libsql's own native
+# binding (it's loaded through a dynamic, platform-dependent require), even
+# though the top-level `libsql` package itself is traced correctly. Copying
+# the full pnpm store entries for libsql/@libsql from the deps stage (a real
+# `pnpm install`, not a pruned trace) guarantees they're present regardless.
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules/.pnpm/libsql@* ./node_modules/.pnpm/
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules/.pnpm/@libsql+* ./node_modules/.pnpm/
 
 USER nextjs
 
