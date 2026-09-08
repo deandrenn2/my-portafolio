@@ -15,6 +15,7 @@ import { Apps } from './collections/apps'
 import { Blog } from './collections/Blog'
 import { Services } from './collections/Services'
 import { Contacts } from './collections/Contacts'
+import { migrations } from './migrations'
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -47,6 +48,9 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URI || '',
     },
+    // In production, run any pending migrations automatically on startup
+    // instead of relying on Drizzle's `db push` (dev-only schema sync).
+    prodMigrations: migrations,
   }),
   sharp,
   plugins: [
