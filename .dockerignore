@@ -1,0 +1,34 @@
+node_modules
+.next
+.git
+.gitignore
+.vscode
+.idea
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env files (keep example, drop real secrets)
+.env
+.env*.local
+test.env
+
+# local databases
+*.db
+*.db-journal
+
+# uploaded media (persisted via volume in production, not part of the image)
+media
+
+# tests & reports
+tests
+test-results
+playwright-report
+blob-report
+coverage
+
+Dockerfile
+docker-compose.yml
+README.md
+DOKPLOY.md
