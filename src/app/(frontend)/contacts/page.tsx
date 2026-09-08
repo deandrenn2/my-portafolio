@@ -1,10 +1,15 @@
 'use client'
 import Image from 'next/image'
 import '../contacts/contacts.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
 import Foto from '@/Img/30e94844-a5b5-4ac5-a00d-c4dea890015d-1.png'
 import { ContactSetting } from '@/payload-types'
+
+interface Captcha {
+    question: string
+    token: string
+}
 
 const ContactsPage = () => {
     const [form, setForm] = useState({
@@ -17,6 +22,31 @@ const ContactsPage = () => {
 
     const [errors, setErrors] = useState<string[]>([])
     const [contactPhotoUrl, setContactPhotoUrl] = useState<string | null>(null)
+
+    // Captcha matemático propio (sin servicios externos): el servidor genera
+    // la pregunta y firma la respuesta dentro del token.
+    const [captcha, setCaptcha] = useState<Captcha | null>(null)
+    const [captchaAnswer, setCaptchaAnswer] = useState('')
+    const [captchaError, setCaptchaError] = useState(false)
+
+    // Campo señuelo (honeypot): debe quedar siempre vacío para humanos.
+    const [website, setWebsite] = useState('')
+
+    // Marca de tiempo de cuando se mostró el formulario, para detectar envíos
+    // sospechosamente rápidos (bots).
+    const startedAtRef = useRef(Date.now())
+
+    const loadCaptcha = async () => {
+        try {
+            const res = await fetch('/api/captcha')
+            const data = (await res.json()) as Captcha
+            setCaptcha(data)
+            setCaptchaAnswer('')
+            startedAtRef.current = Date.now()
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     useEffect(() => {
         const getContactSettings = async () => {
@@ -31,6 +61,7 @@ const ContactsPage = () => {
             }
         }
         getContactSettings()
+        loadCaptcha()
     }, [])
 
     const handleChange = (e: any) => {
@@ -63,14 +94,49 @@ const ContactsPage = () => {
             return
         }
 
+        if (!captcha || !captchaAnswer.trim()) {
+            setCaptchaError(true)
+            Swal.fire({
+                title: "Verificación pendiente",
+                text: "Resuelve la operación para confirmar que no eres un robot",
+                icon: "warning",
+                timer: 3000,
+                timerProgressBar: true,
+                confirmButtonColor: '#a730d6'
+            })
+            return
+        }
+
         try {
-            const res = await fetch('/api/contacts', {
+            const res = await fetch('/api/contact-submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
+                body: JSON.stringify({
+                    ...form,
+                    website, // honeypot, debe llegar vacío
+                    captchaToken: captcha.token,
+                    captchaAnswer,
+                    startedAt: startedAtRef.current,
+                }),
             })
 
-            if (!res.ok) throw new Error()
+            const data = await res.json().catch(() => null)
+
+            if (!res.ok || !data?.success) {
+                if (data?.error === 'Captcha incorrecto') {
+                    setCaptchaError(true)
+                    await loadCaptcha()
+                    Swal.fire({
+                        title: "Captcha incorrecto",
+                        text: "Resuelve nuevamente la operación matemática",
+                        icon: "error",
+                        timer: 3000,
+                        timerProgressBar: true
+                    })
+                    return
+                }
+                throw new Error(data?.error || 'Error desconocido')
+            }
 
             Swal.fire({
                 title: "¡Enviado!",
@@ -84,6 +150,8 @@ const ContactsPage = () => {
 
             setForm({ name: '', email: '', phone: '', city: '', message: '' })
             setErrors([])
+            setCaptchaError(false)
+            await loadCaptcha()
 
         } catch (error) {
             Swal.fire({
@@ -142,6 +210,43 @@ const ContactsPage = () => {
                             value={form.message}
                             onChange={handleChange}
                         />
+
+                        {/* Honeypot: oculto para personas, visible para bots que
+                            rellenan todos los campos del formulario. */}
+                        <input
+                            type="text"
+                            name="website"
+                            value={website}
+                            onChange={(e) => setWebsite(e.target.value)}
+                            className="contacts-honeypot"
+                            tabIndex={-1}
+                            autoComplete="off"
+                            aria-hidden="true"
+                        />
+
+                        <div className="contacts-captcha">
+                            <label htmlFor="captchaAnswer" className="contacts-captcha-label">
+                                {captcha ? captcha.question : 'Cargando verificación...'}
+                            </label>
+                            <input
+                                id="captchaAnswer"
+                                name="captchaAnswer"
+                                type="text"
+                                inputMode="numeric"
+                                placeholder="Tu respuesta"
+                                value={captchaAnswer}
+                                onChange={(e) => {
+                                    setCaptchaAnswer(e.target.value)
+                                    setCaptchaError(false)
+                                }}
+                                style={{
+                                    border: captchaError ? '2px solid #ff4d4d' : '1px solid #ddd',
+                                    outline: 'none',
+                                    maxWidth: '160px',
+                                }}
+                            />
+                        </div>
+
                         <div className="contacts-btn">
                             <button type="submit" className='contacts-button'>
                                 Enviar Mensaje

@@ -1,10 +1,13 @@
 import { CollectionConfig } from 'payload'
-import nodemailer from 'nodemailer'
+import { sendContactNotification } from '@/lib/mailer'
 
 export const Contacts: CollectionConfig = {
     slug: 'contacts',
     access: {
-        create: () => true,
+        // La creación pública vía REST/GraphQL queda bloqueada: los envíos
+        // reales pasan por /api/contact-submit, que valida el captcha y
+        // crea el registro usando la API local (que no pasa por `access`).
+        create: () => false,
     },
 
 
@@ -40,28 +43,7 @@ export const Contacts: CollectionConfig = {
                 if (operation !== 'create') return
 
                 try {
-                    const transporter = nodemailer.createTransport({
-                        service: 'gmail',
-                        auth: {
-                            user: process.env.GMAIL_USER,
-                            pass: process.env.GMAIL_PASS,
-                        },
-                    })
-
-                    await transporter.sendMail({
-                        from: `"Formulario Web" <${process.env.GMAIL_USER}>`,
-                        to: process.env.GMAIL_USER,
-                        subject: '📩 Nuevo mensaje de contacto',
-                        html: `
-            <h3>Nuevo mensaje</h3>
-            <p><b>Nombre:</b> ${doc.name}</p>
-            <p><b>Email:</b> ${doc.email}</p>
-            <p><b>Teléfono:</b> ${doc.phone}</p>
-            <p><b>Ciudad:</b> ${doc.city}</p>
-            <p><b>Mensaje:</b></p>
-            <p>${doc.message}</p>
-          `,
-                    })
+                    await sendContactNotification(doc)
                 } catch (error) {
                     console.error('Error enviando correo:', error)
                 }

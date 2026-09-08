@@ -132,3 +132,39 @@
         width: 100%;
     }
 }
+
+/* Honeypot: oculto visualmente pero presente en el DOM para que los bots
+   (que suelen ignorar CSS) lo rellenen y se delaten. */
+.contacts-honeypot {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+}
+
+.contacts-captcha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    border-radius: 14px;
+    padding: 10px 14px;
+}
+
+.contacts-captcha-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.contacts-captcha input {
+    flex: 0 1 160px;
+}
