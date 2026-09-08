@@ -22,6 +22,16 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 RUN pnpm install --frozen-lockfile
 
+# Stage the pnpm store entries for libsql/@libsql into their own directory,
+# with a real `cp` (not Docker's COPY, whose wildcard matching flattens a
+# single-match source directory into its contents instead of copying the
+# directory itself, and can then collide across packages). This preserves
+# the exact folder layout pnpm expects so it can be copied as one clean,
+# non-wildcarded COPY into the runner stage later.
+RUN mkdir -p /libsql-extra/node_modules/.pnpm && \
+    cp -a /app/node_modules/.pnpm/libsql@* /libsql-extra/node_modules/.pnpm/ && \
+    cp -a /app/node_modules/.pnpm/@libsql+* /libsql-extra/node_modules/.pnpm/
+
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -67,11 +77,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Safety net: Next's output file tracing can miss libsql's own native
 # binding (it's loaded through a dynamic, platform-dependent require), even
-# though the top-level `libsql` package itself is traced correctly. Copying
-# the full pnpm store entries for libsql/@libsql from the deps stage (a real
-# `pnpm install`, not a pruned trace) guarantees they're present regardless.
-COPY --from=deps --chown=nextjs:nodejs /app/node_modules/.pnpm/libsql@* ./node_modules/.pnpm/
-COPY --from=deps --chown=nextjs:nodejs /app/node_modules/.pnpm/@libsql+* ./node_modules/.pnpm/
+# though the top-level `libsql` package itself is traced correctly. This
+# merges in the pre-staged pnpm store entries (a real `pnpm install`, not a
+# pruned trace) as a single directory copy, so nothing gets flattened.
+COPY --from=deps --chown=nextjs:nodejs /libsql-extra/node_modules/.pnpm ./node_modules/.pnpm
 
 USER nextjs
 
