@@ -4,13 +4,16 @@
 
 FROM node:22.17.0-alpine AS base
 
+# Pin pnpm explicitly instead of relying on corepack, which needs to reach
+# npm's registry to resolve a version and can fail in restricted build
+# environments.
+RUN npm install -g pnpm@10
+
 # Install dependencies only when needed
 FROM base AS deps
 # libc6-compat is needed for some native deps on alpine
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
-RUN corepack enable
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 RUN pnpm install --frozen-lockfile
@@ -18,20 +21,18 @@ RUN pnpm install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-RUN corepack enable
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build-time env vars Payload needs to generate types/config during `next build`.
-# Real values are provided at runtime by Dokploy; these are safe placeholders
-# so the build step doesn't fail when it touches the db/config.
+# Payload's config is imported while `next build` bundles routes, so it
+# needs a syntactically valid DATABASE_URI at build time even though no
+# real connection happens. PAYLOAD_SECRET is not required here (it falls
+# back to an empty string in payload.config.ts) so it is never baked in.
 ARG DATABASE_URI=file:./data/portafolio.db
-ARG PAYLOAD_SECRET=build-time-placeholder-secret
 ENV DATABASE_URI=${DATABASE_URI}
-ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
 
 RUN pnpm run build
 

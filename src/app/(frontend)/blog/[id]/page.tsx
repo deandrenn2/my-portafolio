@@ -3,9 +3,9 @@ import './blogDetaill.css'
 import { FaBookmark, FaComment, FaHandsHelping, FaTree } from "react-icons/fa";
 
 type Props = {
-    params: {
+    params: Promise<{
         id: string
-    }
+    }>
 }
 
 async function getBlog(id: string) {
