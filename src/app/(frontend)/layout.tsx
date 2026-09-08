@@ -1,8 +1,6 @@
 import './styles.css'
 import '@/layout/Sidebar/sidebar.css'
-import { Sidebar } from '@/layout/Sidebar/Sidebar'
-import { Header } from '@/layout/Header/Header'
-import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
+import { AppShell } from '@/layout/AppShell/AppShell'
 
 export const metadata = {
   title: 'Deandre',
@@ -16,17 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://use.typekit.net/jsc6ghr.css" />
       </head>
       <body>
-        <Header />
-        <div className="container-principal">
-          <Sidebar />
-          <main className="layout-main">
-            {children}
-            <CreditsSlider />
-          </main>
-        </div>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   )

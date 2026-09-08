@@ -2,7 +2,7 @@
 
 .blogdetaill-title{
     text-align: center;
-    font-size: 50px;
+    font-size: clamp(30px, 6vw, 50px);
     color: white;
 }
 
@@ -37,10 +37,12 @@ font-size: 18px;
 }
 
 .blogdetaill-info{
-    width: 80%;
+    width: 90%;
+    max-width: 900px;
     display: flex;
     gap: 20px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 
@@ -81,7 +83,8 @@ font-size: 18px;
 }
 
 .blogdetaill-description{
-    width: 80%;
+    width: 90%;
+    max-width: 900px;
     height: auto;
     padding: 20px;
     color: white;
@@ -89,8 +92,23 @@ font-size: 18px;
 }
 
 .blogdetaill-description-text{
-    font-size: 24px;
+    font-size: clamp(16px, 2.4vw, 24px);
     line-height: 1.6;
     font-weight: 500;
     white-space: pre-line;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+    .blogdetaill-img {
+        width: 100%;
+        height: 130px;
+    }
+
+    .blogdetaill-info,
+    .blogdetaill-description {
+        width: 100%;
+        padding: 12px;
+    }
 }

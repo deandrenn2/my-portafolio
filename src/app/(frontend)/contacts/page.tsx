@@ -1,9 +1,10 @@
 'use client'
 import Image from 'next/image'
 import '../contacts/contacts.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import Foto from '@/Img/30e94844-a5b5-4ac5-a00d-c4dea890015d-1.png'
+import { ContactSetting } from '@/payload-types'
 
 const ContactsPage = () => {
     const [form, setForm] = useState({
@@ -15,6 +16,22 @@ const ContactsPage = () => {
     })
 
     const [errors, setErrors] = useState<string[]>([])
+    const [contactPhotoUrl, setContactPhotoUrl] = useState<string | null>(null)
+
+    useEffect(() => {
+        const getContactSettings = async () => {
+            try {
+                const res = await fetch('/api/globals/contact-settings')
+                const data = await res.json() as ContactSetting
+                if (data.photo && typeof data.photo === 'object' && data.photo.url) {
+                    setContactPhotoUrl(data.photo.url)
+                }
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        getContactSettings()
+    }, [])
 
     const handleChange = (e: any) => {
         setForm({
@@ -133,7 +150,14 @@ const ContactsPage = () => {
                     </form>
                 </div>
                 <div className="contacts-foto-box">
-                    <Image src={Foto} alt="Foto" className='contacts-foto' />
+                    <Image
+                        src={contactPhotoUrl || Foto}
+                        alt="Foto"
+                        className='contacts-foto'
+                        width={340}
+                        height={480}
+                        unoptimized={!!contactPhotoUrl}
+                    />
                 </div>
             </div>
         </div>

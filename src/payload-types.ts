@@ -101,9 +101,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     profiles: Profile;
+    'contact-settings': ContactSetting;
   };
   globalsSelect: {
     profiles: ProfilesSelect<false> | ProfilesSelect<true>;
+    'contact-settings': ContactSettingsSelect<false> | ContactSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -554,6 +556,19 @@ export interface Profile {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-settings".
+ */
+export interface ContactSetting {
+  id: number;
+  /**
+   * Imagen mostrada junto al formulario de contacto.
+   */
+  photo?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "profiles_select".
  */
 export interface ProfilesSelect<T extends boolean = true> {
@@ -569,6 +584,16 @@ export interface ProfilesSelect<T extends boolean = true> {
         tag?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-settings_select".
+ */
+export interface ContactSettingsSelect<T extends boolean = true> {
+  photo?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

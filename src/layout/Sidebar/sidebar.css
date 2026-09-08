@@ -1,5 +1,5 @@
 .sidebar {
-  width: 260px;
+  width: var(--sidebar-width, 260px);
   height: 100vh;
   padding: 25px 20px;
   display: flex;
@@ -7,6 +7,7 @@
   justify-content: space-between;
   color: white;
   border-right: 1px solid #465d6a;
+  transition: transform 0.3s ease;
 }
 
 
@@ -19,7 +20,7 @@
 }
 
 .title {
-  font-size: 36px;
+  font-size: clamp(26px, 4vw, 36px);
   margin-bottom: 4px;
   font-weight: 700;
   margin: 0px;
@@ -63,4 +64,23 @@
 .menu-btn.active {
   background: rgba(209, 217, 221);
   color: #0c63c0;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+  .sidebar {
+    max-width: 320px;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 380px) {
+  .menu-btn {
+    font-size: 16px;
+  }
 }

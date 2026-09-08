@@ -16,11 +16,18 @@
     --gradient-6: rgba(20, 10, 40, 1);
     --font-family: Obviously, Georgia, 'Times New Roman', Times, serif, system-ui;
     --font-family-title: hagrid, obviously, system-ui;
+    --sidebar-width: 250px;
+    --header-height: 70px;
 }
 
 * {
     box-sizing: border-box;
 }
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
      margin: 0;
     padding: 0;
@@ -29,6 +36,11 @@ body {
     background-image: url('/Fondo1.png');
     background-attachment: fixed;
     background-size: cover;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
 }
 
 
@@ -50,7 +62,7 @@ body {
 }
 
 .layout-main{
-    margin-left: 250px;
+    margin-left: var(--sidebar-width);
     width: 100%;
     min-height: calc(100vh);
     padding: 20px;
@@ -59,6 +71,7 @@ body {
      height: calc(100vh - 70px);
     overflow-y: auto;
     scrollbar-width: none;
+    transition: margin-left 0.3s ease;
 }
 
 .header {
@@ -66,8 +79,8 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
-    z-index: 100;
+    height: var(--header-height);
+    z-index: 1100;
        background: rgb(90 88 88 / 27%);
     backdrop-filter: blur(15px);
 }
@@ -77,11 +90,21 @@ body {
     position: fixed;
     top: 70px;
     left: 0;
-    width: 250px;
+    width: var(--sidebar-width);
     height: calc(100vh - 70px);
     z-index: 1000;
         background: rgb(90 88 88 / 27%);
     backdrop-filter: blur(15px);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 .home {
@@ -99,6 +122,8 @@ body {
 .profile-section {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .credits-slider{
@@ -121,4 +146,40 @@ body {
 
 .fade-up {
     animation: fadeUp 0.8s ease-out both;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 220px;
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --sidebar-width: 78vw;
+    }
+
+    .layout-main {
+        margin-left: 0;
+        height: auto;
+        min-height: calc(100vh - 70px);
+        padding: 16px;
+        padding-top: 24px;
+        padding-bottom: 90px;
+        overflow-y: visible;
+    }
+
+    .home {
+        padding-top: 10px;
+        padding-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .layout-main {
+        padding: 12px;
+        padding-bottom: 80px;
+    }
 }

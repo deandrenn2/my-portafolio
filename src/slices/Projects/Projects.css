@@ -7,10 +7,11 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .projects-titulo {
-    font-size: 35px;
+    font-size: clamp(24px, 4vw, 35px);
     font-weight: 700;
     transform: translateY(14px);
 }
@@ -20,7 +21,9 @@
     flex-direction: column;
     border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.305);
-    width: 420px;
+    width: 100%;
+    max-width: 420px;
+    flex: 1 1 320px;
     height: auto;
     transition: none;
 }
@@ -55,6 +58,7 @@
 .projects-titulos {
     padding: 5px;
     margin: 0;
+    min-width: 0;
 }
 
 .titulo-optic {
@@ -62,7 +66,7 @@
     flex-direction: column;
     line-height: 1.2;
     font-weight: 700;
-    font-size: 24px;
+    font-size: clamp(18px, 3vw, 24px);
 
 }
 
@@ -74,7 +78,7 @@
 
 .projects-descripcion {
     padding: 10px;
-    font-size: 21px;
+    font-size: clamp(16px, 2.2vw, 21px);
     height: auto;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: rgb(237, 235, 235);
@@ -99,4 +103,16 @@
     font-weight: 700;
     color: #0c63c0;
     transition: 0.3s;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+    .projects-container {
+        padding: 16px;
+    }
+
+    .projects-card {
+        flex: 1 1 100%;
+    }
 }

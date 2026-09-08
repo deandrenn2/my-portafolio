@@ -8,7 +8,9 @@
 .credits-slider-content {
     display: flex;
     width: 90%;
+    align-items: center;
     justify-content: space-between;
+    gap: 12px;
 }
 
 
@@ -20,6 +22,7 @@
     justify-content: center;
     color: rgba(255, 255, 255, 0.821);
     margin: -60px;
+    flex-shrink: 0;
 }
 
 .credits-content {
@@ -40,4 +43,23 @@
     color: #2d7dff;
     font-weight: 600;
     text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 700px) {
+    .credits-slider {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .arrow {
+        width: 60px;
+        height: 60px;
+        margin: 0;
+    }
+
+    .credits-content {
+        font-size: 16px;
+    }
 }
