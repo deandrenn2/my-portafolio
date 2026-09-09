@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { FaTelegramPlane } from 'react-icons/fa'
 import { Loading } from '@/components/Loading/Loading'
 import TextNeonSvg from '@/components/Text/TextNeonSvg'
+import { Tilt3D } from '@/components/Tilt3D/Tilt3D'
 import { Profile as ProfileType, Media } from '@/payload-types'
 export const Profile = () => {
     const [profile, setProfile] = useState<ProfileType>({
@@ -103,13 +104,15 @@ export const Profile = () => {
 
             <div className="profile-photo-box">
                 {typeof profile.photo === 'object' && profile.photo?.url && (
-                    <Image
-                        src={profile.photo?.url || ''}
-                        alt={profile.title ?? ''}
-                        className="profile-photo"
-                        width={340}
-                        height={480}
-                    />
+                    <Tilt3D className="profile-photo-tilt">
+                        <Image
+                            src={profile.photo?.url || ''}
+                            alt={profile.title ?? ''}
+                            className="profile-photo"
+                            width={340}
+                            height={480}
+                        />
+                    </Tilt3D>
                 )}
             </div>
         </div>
