@@ -3,7 +3,6 @@ import Image from 'next/image'
 import '../contacts/contacts.css'
 import { useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
-import Foto from '@/Img/30e94844-a5b5-4ac5-a00d-c4dea890015d-1.png'
 import { ContactSetting } from '@/payload-types'
 
 interface Captcha {
@@ -256,12 +255,12 @@ const ContactsPage = () => {
                 </div>
                 <div className="contacts-foto-box">
                     <Image
-                        src={contactPhotoUrl || Foto}
+                        src={contactPhotoUrl || '/avatar-placeholder.svg'}
                         alt="Foto"
                         className='contacts-foto'
                         width={340}
                         height={480}
-                        unoptimized={!!contactPhotoUrl}
+                        unoptimized
                     />
                 </div>
             </div>

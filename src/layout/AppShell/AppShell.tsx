@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { Sidebar } from '../Sidebar/Sidebar'
 import { Header } from '../Header/Header'
 import { CreditsSlider } from '@/components/CreditsSlider/CreditsSlider'
+import { InitLoader } from '@/components/InitLoader/InitLoader'
 
 export const AppShell = ({ children }: { children: React.ReactNode }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -15,6 +16,7 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
+            <InitLoader />
             <Header onToggleSidebar={() => setSidebarOpen((prev) => !prev)} />
             <div className="container-principal">
                 <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
