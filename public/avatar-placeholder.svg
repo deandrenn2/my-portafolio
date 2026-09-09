@@ -1,19 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 480" role="img" aria-label="Avatar por defecto">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#241b36"/>
-      <stop offset="100%" stop-color="#141022"/>
-    </linearGradient>
-    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#4da3ff"/>
-      <stop offset="100%" stop-color="#a730d6"/>
-    </linearGradient>
-  </defs>
-  <rect width="340" height="480" fill="url(#bg)"/>
-  <circle cx="170" cy="185" r="92" fill="none" stroke="url(#ring)" stroke-width="2" stroke-dasharray="6 8" opacity="0.55"/>
-  <circle cx="170" cy="178" r="54" fill="#2f2648"/>
-  <path d="M78 400c8-58 46-97 92-97s84 39 92 97" fill="#2f2648"/>
-  <circle cx="170" cy="178" r="54" fill="none" stroke="url(#ring)" stroke-width="2.5"/>
-  <path d="M78 400c8-58 46-97 92-97s84 39 92 97" fill="none" stroke="url(#ring)" stroke-width="2.5"/>
-  <text x="170" y="452" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="2" fill="#cbd5de" opacity="0.75">SIN FOTO</text>
+  <rect width="340" height="480" fill="#12111a"/>
+  <g fill="none" stroke="#e8edf2" stroke-width="1.25" opacity="0.85">
+    <circle cx="170" cy="188" r="46"/>
+    <path d="M92 372c6-56 38-92 78-92s72 36 78 92"/>
+  </g>
 </svg>
